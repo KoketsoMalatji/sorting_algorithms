@@ -29,44 +29,44 @@ int integer_count(int *array, size_t size, int range)
 */
 void counting_sort(int *array, size_t size)
 {
-	int j = 0, b = 0, a = 0;
+	int k = 0, b = 0, r = 0;
 	size_t i, c;
-	int *array2, *newArray;
+	int *array2, *nArray;
 
 	if (!array || size < 2)
 		return;
 	for (i = 0; i < size; i++)
 	{
-		if (array[i] > j)
+		if (array[i] > k)
 		{
-			j = array[i];
+			k = array[i];
 		}
 	}
-	array2 = malloc(sizeof(int) * (j + 1));
+	array2 = malloc(sizeof(int) * (k + 1));
 	if (!array2)
 		return;
-	for (c = 0; c < ((size_t)j + 1); c++)
+	for (c = 0; c < ((size_t)k + 1); c++)
 	{
 		if (c == 0)
-			array2[c] = integer_count(array, size, a);
+			array2[c] = integer_count(array, size, r);
 		else
 		{
-			b = array2[c - 1] + integer_count(array, size, a);
+			b = array2[c - 1] + integer_count(array, size, r);
 			array2[c] = b;
 		}
 		r++;
 	}
-	print_array(array2, (j + 1));
-	newArray = malloc(sizeof(int) * size);
-	if (!newArray)
+	print_array(array2, (k + 1));
+	nArray = malloc(sizeof(int) * size);
+	if (!nArray)
 	{
 		free(array2);
 		return;
 	}
 	for (i = 0; i < size; i++)
-		newArray[array2[array[i]]-- - 1] = array[i];
+		nArray[array2[array[i]]-- - 1] = array[i];
 	for (i = 0; i < size; i++)
-		array[i] = newArray[i];
-	free(newArray);
+		array[i] = nArray[i];
+	free(nArray);
 	free(array2);
 }

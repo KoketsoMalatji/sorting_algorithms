@@ -35,19 +35,19 @@ void insertion_sort_list(listint_t **list)
 	i = (*list)->next;
 	while (i)
 	{
-		k = i;
+		j = i;
 		i = i->next;
-		while (k && k->prev)
+		while (j && j->prev)
 		{
-			if (k->prev->n > k->n)
+			if (j->prev->n > j->n)
 			{
-				swap(k->prev, k);
-				if (!k->prev)
-					*list = k;
+				swap(j->prev, j);
+				if (!j->prev)
+					*list = j;
 				print_list((const listint_t *)*list);
 			}
 			else
-				k = k->prev;
+				j = j->prev;
 		}
 
 	}

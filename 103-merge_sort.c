@@ -9,9 +9,9 @@
  *
  * Return: void.
  */
-void merge_compare(int *array, size_t start, size_t stop, int *newArray)
+void merge_compare(int *array, size_t start, size_t stop, int *new)
 {
-	size_t i = start, j, x, mid;
+	size_t i = start, j, k, mid;
 
 	j = mid = (start + stop) / 2;
 	printf("Merging...\n");
@@ -19,18 +19,18 @@ void merge_compare(int *array, size_t start, size_t stop, int *newArray)
 	print_array(array + start, mid - start);
 	printf("[right]: ");
 	print_array(array + mid, stop - mid);
-	for (x = start; x < stop; x++)
+	for (k = start; k < stop; k++)
 		if (i < mid && (j >= stop || array[i] <= array[j]))
 		{
 
-			newArray[x] = array[i++];
+			new[k] = array[i++];
 		}
 		else
 		{
-			newArray[x] = array[j++];
+			new[k] = array[j++];
 		}
 	printf("[Done]: ");
-	print_array(newArray + start, stop - start);
+	print_array(new + start, stop - start);
 }
 
 /**
@@ -42,7 +42,7 @@ void merge_compare(int *array, size_t start, size_t stop, int *newArray)
  *
  * Return: void.
  */
-void merge_sort_top_down(int *array, size_t start, size_t stop, int *newArray)
+void merge_sort_top_down(int *array, size_t start, size_t stop, int *new)
 {
 	size_t mid;
 
@@ -51,9 +51,9 @@ void merge_sort_top_down(int *array, size_t start, size_t stop, int *newArray)
 	{
 		return;
 	}
-	merge_sort_top_down(newArray, start, mid, array);
-	merge_sort_top_down(newArray, mid, stop, array);
-	merge_compare(newArray, start, stop, array);
+	merge_sort_top_down(new, start, mid, array);
+	merge_sort_top_down(new, mid, stop, array);
+	merge_compare(new, start, stop, array);
 }
 
 
@@ -66,18 +66,18 @@ void merge_sort_top_down(int *array, size_t start, size_t stop, int *newArray)
  */
 void merge_sort(int *array, size_t size)
 {
-	int *newArray;
+	int *new;
 	size_t i;
 
 
 	if (!array || size < 2)
 		return;
 
-	newArray = malloc(sizeof(int) * size);
-	if (!newArray)
+	new = malloc(sizeof(int) * size);
+	if (!new)
 		return;
 	for (i = 0; i < size; i++)
-		newArray[i] = array[i];
-	merge_sort_top_down(array, 0, size, newArray);
-	free(newArray);
+		new[i] = array[i];
+	merge_sort_top_down(array, 0, size, new);
+	free(new);
 }

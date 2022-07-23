@@ -33,21 +33,21 @@ void swap(int *array, size_t size, int *a, int *b)
 */
 void siftdown(int *array, size_t start, size_t end, size_t size)
 {
-	size_t root = start, _change, child;
+	size_t root = start, _swap, child;
 
 	while (leftchild(root) <= end)
 	{
 		child = leftchild(root);
-		_change = root;
-		if (array[_change] < array[child])
-			_change = child;
+		_swap = root;
+		if (array[_swap] < array[child])
+			_swap = child;
 		if (child + 1 <= end &&
-			array[_change] < array[child + 1])
-			_change = child + 1;
+			array[_swap] < array[child + 1])
+			_swap = child + 1;
 		if (_swap == root)
 			return;
 		swap(array, size, &array[root], &array[_swap]);
-		root = _change;
+		root = _swap;
 	}
 }
 
